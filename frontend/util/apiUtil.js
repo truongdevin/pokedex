@@ -10,5 +10,15 @@ module.exports = {
       },
       dataType: 'json'
     });
+  },
+  fetchSinglePokemon: function(props) {
+    $.ajax({
+      url: 'api/pokemon/'+ props.params.pokemonId,
+      method: 'GET',
+      success: function(pokemon) {
+        ServerActions.receiveSinglePokemon(pokemon);
+      },
+      dataType: 'json'
+    });
   }
 };

@@ -6,15 +6,19 @@ var Route = require('react-router').Route;
 var HashHistory = require('react-router').hashHistory;
 
 var PokemonsIndex = require('./components/pokemons/pokemonsIndex');
-
-// clientAction = require('./actions/clientActions');
-// PokemonStore = require('./stores/pokemonStore');
+var PokemonDetail = require('./components/pokemons/pokemonDetail');
+var ToyDetail = require('./components/toys/toyDetail');
+var PokemonForm = require('./components/pokemons/pokemonForm');
 
 var App = React.createClass({
   render: function() {
     return (
       <div id="pokedex">
-        <div className="pokemon-index-pane"><PokemonsIndex/></div>
+        <div className="pokemon-index-pane">
+          <PokemonForm/>
+          <PokemonsIndex/>
+        </div>
+        <div>{this.props.children}</div>
       </div>
     );
   }
@@ -22,6 +26,10 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={App}>
+    <Route path='pokemon/:pokemonId' component={PokemonDetail}>
+      <Route path='toy/:toyId' component={ToyDetail}>
+      </Route>
+    </Route>
   </Route>
 );
 
